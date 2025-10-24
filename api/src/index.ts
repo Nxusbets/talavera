@@ -6,6 +6,8 @@ import knexfile from '../knexfile.js';
 import { createAuthRoutes } from './routes/auth.js';
 import { createProjectRoutes } from './routes/projects.js';
 import { createSubscriptionRoutes } from './routes/subscriptions.js';
+import { PlanController } from './controllers/PlanController.js';
+import { PlanRepository } from './repositories/PlanRepository.js';
 
 dotenv.config();
 
@@ -38,8 +40,14 @@ app.get('/health', (_req, res) => {
 // API Routes
 app.use('/api/auth', createAuthRoutes(db));
 app.use('/api/projects', createProjectRoutes(db));
+
+// Public Plans endpoint
+const planRepository = new PlanRepository(db);
+const planController = new PlanController(planRepository);
+app.get('/api/plans', (req, res) => planController.list(req, res));
+
+// Protected Subscriptions endpoints
 app.use('/api/subscriptions', createSubscriptionRoutes(db));
-app.use('/api/plans', createSubscriptionRoutes(db)); // Plans are also under subscriptions route
 
 // Error handling middleware
 app.use((err: any, _req: express.Request, res: express.Response, _next: express.NextFunction) => {

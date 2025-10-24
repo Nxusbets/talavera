@@ -37,11 +37,11 @@ export function createSubscriptionRoutes(knex: Knex): Router {
   const authMiddleware = createAuthMiddleware(authService);
 
   // Routes - Plans (public)
-  router.get('/plans', (req, res) => planController.list(req, res));
+  router.get('/', (req, res) => planController.list(req, res));
 
   // Routes - Subscriptions (protected)
-  router.post('/', authMiddleware, (req, res) => subscriptionController.create(req, res));
-  router.get('/', authMiddleware, (req, res) => subscriptionController.get(req, res));
+  router.post('/create', authMiddleware, (req, res) => subscriptionController.create(req, res));
+  router.get('/current', authMiddleware, (req, res) => subscriptionController.get(req, res));
 
   return router;
 }

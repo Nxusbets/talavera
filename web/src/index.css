@@ -481,6 +481,56 @@ button[type='submit']:disabled,
   text-align: center;
 }
 
+/* Project Form Styles */
+.project-form {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  border: 2px solid #667eea;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.project-input {
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1em;
+  transition: all 0.3s ease;
+}
+
+.project-input:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.form-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.form-buttons button {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.cancel-button {
+  background: #ecf0f1;
+  color: #333;
+}
+
+.cancel-button:hover {
+  background: #bdc3c7;
+  transform: translateY(-2px);
+}
+
 /* Responsive Dashboard */
 @media (max-width: 768px) {
   .dashboard-content {

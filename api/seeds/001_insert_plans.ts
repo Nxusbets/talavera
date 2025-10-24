@@ -1,7 +1,11 @@
 import { Knex } from 'knex';
 
 export async function seed(knex: Knex): Promise<void> {
-  // Deletes ALL existing entries (only for development)
+  // Delete dependent records first to avoid FK constraint violations
+  await knex('invoices').del();
+  await knex('subscriptions').del();
+  await knex('projects').del();
+  await knex('users').del();
   await knex('plans').del();
 
   // Inserts seed entries

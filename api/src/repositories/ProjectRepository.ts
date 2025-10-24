@@ -86,4 +86,13 @@ export class ProjectRepository {
 
     return !result;
   }
+
+  /**
+   * Delete a project by ID
+   */
+  async delete(projectId: number): Promise<void> {
+    await this.knex('projects')
+      .where({ id: projectId })
+      .delete();
+  }
 }

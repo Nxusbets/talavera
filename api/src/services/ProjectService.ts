@@ -64,6 +64,22 @@ export class ProjectService {
   }
 
   /**
+   * Delete a project (with authorization check)
+   */
+  async deleteProject(projectId: number, userId: number): Promise<void> {
+    const project = await this.projectRepository.findByIdAndUserId(
+      projectId,
+      userId
+    );
+
+    if (!project) {
+      throw new Error('errors.project_not_found');
+    }
+
+    await this.projectRepository.delete(projectId);
+  }
+
+  /**
    * Generate URL-safe slug from project name
    */
   private generateSlug(name: string): string {

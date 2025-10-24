@@ -139,4 +139,39 @@ export class ProjectController {
       );
     }
   }
+
+  /**
+   * DELETE /api/projects/:id - Delete a project
+   */
+  async delete(req: Request, res: Response): Promise<void> {
+    try {
+      if (!req.user) {
+        res.status(401).json(createErrorResponse('errors.unauthorized', 'Unauthorized'));
+        return;
+      }
+
+      const projectId = parseInt(req.params.id, 10);
+      if (isNaN(projectId)) {
+        res.status(400).json(createErrorResponse('errors.invalid_id', 'Invalid project ID'));
+        return;
+      }
+
+      await this.projectService.deleteProject(projectId, req.user.userId);
+
+      res.status(204).send();
+    } catch (error) {
+      if (error instanceof Error) {
+        if (error.message === 'errors.project_not_found') {
+          res.status(404).json(
+            createErrorResponse('errors.project_not_found', 'Project not found')
+          );
+          return;
+        }
+      }
+
+      res.status(500).json(
+        createErrorResponse('errors.internal_error', 'Internal server error')
+      );
+    }
+  }
 }

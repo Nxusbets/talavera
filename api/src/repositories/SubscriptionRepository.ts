@@ -28,15 +28,39 @@ export class SubscriptionRepository {
   }
 
   /**
-   * Find user's active subscription
+   * Find user's active subscription with plan details
    */
   async findByUserId(userId: number): Promise<Subscription | null> {
     const subscription = await this.knex('subscriptions')
-      .where({ user_id: userId, status: 'active' })
-      .orderBy('created_at', 'desc')
+      .where('subscriptions.user_id', userId)
+      .where('subscriptions.status', 'active')
+      .join('plans', 'subscriptions.plan_id', 'plans.id')
+      .select(
+        'subscriptions.*',
+        'plans.id as plan_id',
+        'plans.code as plan_code',
+        'plans.name_en as plan_name_en',
+        'plans.name_es as plan_name_es',
+        'plans.projects_quota as plan_projects_quota',
+        'plans.price as plan_price'
+      )
+      .orderBy('subscriptions.created_at', 'desc')
       .first();
 
-    return (subscription as Subscription) || null;
+    if (!subscription) return null;
+
+    // Transform the response to include nested plan object
+    return {
+      ...subscription,
+      plan: {
+        id: subscription.plan_id,
+        code: subscription.plan_code,
+        name_en: subscription.plan_name_en,
+        name_es: subscription.plan_name_es,
+        projects_quota: subscription.plan_projects_quota,
+        price: subscription.plan_price,
+      },
+    } as any;
   }
 
   /**

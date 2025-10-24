@@ -34,6 +34,7 @@ export function createProjectRoutes(knex: Knex): Router {
   );
   router.get('/', authMiddleware, (req, res) => projectController.list(req, res));
   router.get('/:id', authMiddleware, (req, res) => projectController.get(req, res));
+  router.delete('/:id', authMiddleware, (req, res) => projectController.delete(req, res));
 
   return router;
 }
