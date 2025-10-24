@@ -3,13 +3,13 @@ import { useTranslation } from 'react-i18next';
 import { z } from 'zod';
 
 const SignUpSchema = z.object({
-  email: z.string().email('Email inválido'),
+  email: z.string().email('Invalid email'),
   password: z
     .string()
-    .min(8, 'Mínimo 8 caracteres')
-    .regex(/[A-Z]/, 'Debe contener al menos una mayúscula')
-    .regex(/[0-9]/, 'Debe contener al menos un número'),
-  locale: z.enum(['en', 'es']).optional().default('es')
+    .min(8, 'Minimum 8 characters')
+    .regex(/[A-Z]/, 'Must contain at least one uppercase letter')
+    .regex(/[0-9]/, 'Must contain at least one number'),
+  locale: z.enum(['en', 'es']).optional().default('en')
 });
 
 type SignUpFormData = z.infer<typeof SignUpSchema>;
@@ -24,7 +24,7 @@ export const SignUp: React.FC<SignUpComponentProps> = ({ onSubmit }) => {
     email: '',
     password: '',
     confirmPassword: '',
-    locale: 'es'
+    locale: 'en'
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isLoading, setIsLoading] = useState(false);
@@ -49,7 +49,7 @@ export const SignUp: React.FC<SignUpComponentProps> = ({ onSubmit }) => {
     try {
       // Validate passwords match
       if (formData.password !== formData.confirmPassword) {
-        setErrors({ confirmPassword: 'Las contraseñas no coinciden' });
+        setErrors({ confirmPassword: 'Passwords do not match' });
         return;
       }
 
@@ -62,8 +62,8 @@ export const SignUp: React.FC<SignUpComponentProps> = ({ onSubmit }) => {
       if (onSubmit) {
         setIsLoading(true);
         await onSubmit(validatedData);
-        setSuccessMessage('¡Usuario registrado exitosamente!');
-        setFormData({ email: '', password: '', confirmPassword: '', locale: 'es' });
+        setSuccessMessage('User registered successfully!');
+        setFormData({ email: '', password: '', confirmPassword: '', locale: 'en' });
       }
     } catch (error) {
       if (error instanceof z.ZodError) {
@@ -83,7 +83,7 @@ export const SignUp: React.FC<SignUpComponentProps> = ({ onSubmit }) => {
 
   return (
     <form onSubmit={handleSubmit} className="sign-up-form">
-      <h2>📝 {t('auth.sign_up') || 'Crear Cuenta'}</h2>
+      <h2>📝 {t('auth.sign_up') || 'Sign Up'}</h2>
 
       {generalError && (
         <div className="error-message" role="alert">
@@ -106,7 +106,7 @@ export const SignUp: React.FC<SignUpComponentProps> = ({ onSubmit }) => {
           value={formData.email}
           onChange={handleChange}
           disabled={isLoading}
-          placeholder="correo@ejemplo.com"
+          placeholder="you@example.com"
           aria-invalid={!!errors.email}
           aria-describedby={errors.email ? 'email-error' : undefined}
         />
@@ -118,7 +118,7 @@ export const SignUp: React.FC<SignUpComponentProps> = ({ onSubmit }) => {
       </div>
 
       <div className="form-group">
-        <label htmlFor="password">🔐 {t('auth.password') || 'Contraseña'}</label>
+        <label htmlFor="password">🔐 {t('auth.password') || 'Password'}</label>
         <input
           id="password"
           type="password"
@@ -126,7 +126,7 @@ export const SignUp: React.FC<SignUpComponentProps> = ({ onSubmit }) => {
           value={formData.password}
           onChange={handleChange}
           disabled={isLoading}
-          placeholder="Mín 8 caracteres, 1 mayúscula, 1 número"
+          placeholder="Min 8 chars, 1 uppercase, 1 number"
           aria-invalid={!!errors.password}
           aria-describedby={errors.password ? 'password-error' : undefined}
         />
@@ -138,7 +138,7 @@ export const SignUp: React.FC<SignUpComponentProps> = ({ onSubmit }) => {
       </div>
 
       <div className="form-group">
-        <label htmlFor="confirmPassword">🔐 Confirmar Contraseña</label>
+        <label htmlFor="confirmPassword">🔐 Confirm Password</label>
         <input
           id="confirmPassword"
           type="password"
@@ -146,7 +146,7 @@ export const SignUp: React.FC<SignUpComponentProps> = ({ onSubmit }) => {
           value={formData.confirmPassword}
           onChange={handleChange}
           disabled={isLoading}
-          placeholder="Repite tu contraseña"
+          placeholder="Repeat your password"
           aria-invalid={!!errors.confirmPassword}
           aria-describedby={errors.confirmPassword ? 'confirm-error' : undefined}
         />
@@ -158,7 +158,7 @@ export const SignUp: React.FC<SignUpComponentProps> = ({ onSubmit }) => {
       </div>
 
       <div className="form-group">
-        <label htmlFor="locale">🌐 Idioma</label>
+        <label htmlFor="locale">🌐 Language</label>
         <select
           id="locale"
           name="locale"
@@ -166,20 +166,20 @@ export const SignUp: React.FC<SignUpComponentProps> = ({ onSubmit }) => {
           onChange={handleChange}
           disabled={isLoading}
         >
-          <option value="es">Español</option>
           <option value="en">English</option>
+          <option value="es">Español</option>
         </select>
       </div>
 
       <button type="submit" disabled={isLoading} className="submit-btn">
-        {isLoading ? '⏳ Registrando...' : '✅ Crear Cuenta'}
+        {isLoading ? '⏳ Creating account...' : '✅ Create Account'}
       </button>
 
       <p className="form-hint">
-        ℹ️ <strong>Requisitos de contraseña:</strong><br/>
-        • Mínimo 8 caracteres<br/>
-        • Al menos 1 letra mayúscula<br/>
-        • Al menos 1 número
+        ℹ️ <strong>Password requirements:</strong><br/>
+        • Minimum 8 characters<br/>
+        • At least 1 uppercase letter<br/>
+        • At least 1 number
       </p>
     </form>
   );

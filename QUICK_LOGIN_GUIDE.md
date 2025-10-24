@@ -1,6 +1,6 @@
-# 🚀 Guía Rápida de Autenticación - Talavera SaaS
+# 🚀 Quick Authentication Guide - Talavera SaaS
 
-## 👤 Usuario de Prueba Listo
+## 👤 Test User Ready to Use
 
 ```
 Email:    demo@talavera.dev
@@ -8,32 +8,32 @@ Password: Demo12345
 Token:    eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImVtYWlsIjoiZGVtb0B0YWxhdmVyYS5kZXYiLCJpYXQiOjE3NjEzMzg2NDQsImV4cCI6MTc2MTQyNTA0NH0.0XmeXYzdmTNyDHXa0JtRWNXDWhyBFDtPNEV0KpI2Lb0
 ```
 
-## 🔐 Cómo Autenticarse
+## 🔐 How to Authenticate
 
-### Opción 1: Crear Tu Propio Usuario (Signup)
+### Option 1: Create Your Own User (Signup)
 
 **POST** `http://localhost:3001/api/auth/signup`
 
 ```json
 {
-  "email": "tuusuario@ejemplo.com",
-  "password": "MiPassword123",
-  "locale": "es"
+  "email": "youruser@example.com",
+  "password": "SecurePass123",
+  "locale": "en"
 }
 ```
 
-**Respuesta:**
+**Response:**
 ```json
 {
   "data": {
     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
     "userId": 1,
-    "email": "tuusuario@ejemplo.com"
+    "email": "youruser@example.com"
   }
 }
 ```
 
-### Opción 2: Iniciar Sesión (Signin)
+### Option 2: Sign In (Login)
 
 **POST** `http://localhost:3001/api/auth/signin`
 
@@ -44,11 +44,11 @@ Token:    eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImVtYWlsIjoiZGVtb
 }
 ```
 
-## 🔑 Requisitos de Contraseña
+## 🔑 Password Requirements
 
-- ✅ Mínimo 8 caracteres
-- ✅ Al menos 1 letra mayúscula (A-Z)
-- ✅ Al menos 1 número (0-9)
+- ✅ Minimum 8 characters
+- ✅ At least 1 uppercase letter (A-Z)
+- ✅ At least 1 number (0-9)
 
 **Ejemplos válidos:**
 - `MiPassword123`
@@ -56,30 +56,30 @@ Token:    eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImVtYWlsIjoiZGVtb
 - `Demo12345`
 
 **Ejemplos inválidos:**
-- `password123` (sin mayúscula)
-- `Password` (sin número)
-- `Pass1` (muy corto)
+- `password123` (no uppercase)
+- `Password` (no number)
+- `Pass1` (too short)
 
-## 📡 Usar el Token
+## 📡 Using the Token
 
-Una vez que tengas el token, úsalo en el header de todas las requests autenticadas:
+Once you have the token, use it in the header of all authenticated requests:
 
 ```
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 ```
 
-### Ejemplo con cURL:
+### Example with cURL:
 
 ```bash
-curl -H "Authorization: Bearer TOKEN_AQUI" \
+curl -H "Authorization: Bearer TOKEN_HERE" \
   http://localhost:3001/api/projects
 ```
 
-### Ejemplo con PowerShell:
+### Example with PowerShell:
 
 ```powershell
 $headers = @{
-  "Authorization" = "Bearer TOKEN_AQUI"
+  "Authorization" = "Bearer TOKEN_HERE"
   "Content-Type" = "application/json"
 }
 
@@ -88,80 +88,80 @@ Invoke-WebRequest -Uri "http://localhost:3001/api/projects" `
   -Method Get
 ```
 
-## 🎯 Endpoints Disponibles
+## 🎯 Available Endpoints
 
-### Autenticación
-- `POST /api/auth/signup` - Crear nuevo usuario
-- `POST /api/auth/signin` - Iniciar sesión
-- `GET /health` - Verificar API (sin autenticación)
+### Authentication
+- `POST /api/auth/signup` - Create new user
+- `POST /api/auth/signin` - Sign in user
+- `GET /health` - Check API (no authentication needed)
 
-### Proyectos (requiere autenticación)
-- `POST /api/projects` - Crear proyecto
-- `GET /api/projects/:id` - Obtener proyecto
+### Projects (requires authentication)
+- `POST /api/projects` - Create project
+- `GET /api/projects/:id` - Get project
 
-### Planes y Suscripciones
-- `GET /api/plans` - Ver planes disponibles
-- `POST /api/subscriptions` - Crear suscripción
-- `GET /api/subscriptions/:id` - Ver suscripción
-- `GET /api/invoices/:id` - Ver factura
+### Plans and Subscriptions
+- `GET /api/plans` - View available plans
+- `POST /api/subscriptions` - Create subscription
+- `GET /api/subscriptions/:id` - View subscription
+- `GET /api/invoices/:id` - View invoice
 
-## 💡 Ejemplo Completo
+## 💡 Complete Example
 
-### 1. Registrarse
+### 1. Sign Up
 
 ```bash
 curl -X POST http://localhost:3001/api/auth/signup \
   -H "Content-Type: application/json" \
   -d '{
-    "email": "miusuario@empresa.com",
-    "password": "MiPassword123",
-    "locale": "es"
+    "email": "newuser@example.com",
+    "password": "MyPassword123",
+    "locale": "en"
   }'
 ```
 
-### 2. Copiar el Token Recibido
+### 2. Copy the Received Token
 
 ```json
 {
   "data": {
     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
     "userId": 1,
-    "email": "miusuario@empresa.com"
+    "email": "newuser@example.com"
   }
 }
 ```
 
-### 3. Usar el Token en Próximas Requests
+### 3. Use the Token in Next Requests
 
 ```bash
 curl -X POST http://localhost:3001/api/projects \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..." \
   -d '{
-    "name": "Mi Proyecto",
-    "description": "Descripción del proyecto"
+    "name": "My First Project",
+    "description": "Project description"
   }'
 ```
 
-## ⏰ Validez del Token
+## ⏰ Token Validity
 
-- **Duración:** 24 horas
-- **Después de 24h:** Necesitas iniciar sesión nuevamente
+- **Duration:** 24 hours
+- **After 24h:** You need to sign in again
 
-## 🎮 Herramientas Recomendadas
+## 🎮 Recommended Tools
 
-- **Postman:** https://www.postman.com (GUI amigable)
-- **Insomnia:** https://insomnia.rest (alternativa a Postman)
-- **cURL:** Línea de comandos (preinstalado)
-- **Thunder Client:** Extensión de VS Code
+- **Postman:** https://www.postman.com (GUI friendly)
+- **Insomnia:** https://insomnia.rest (alternative to Postman)
+- **cURL:** Command line (pre-installed)
+- **Thunder Client:** VS Code Extension
 
-## 📍 Endpoints de Acceso
+## 📍 Access Points
 
 - **Frontend:** http://localhost:3000
 - **API:** http://localhost:3001
-- **Base de Datos:** localhost:5432
+- **Database:** localhost:5432
 - **Health Check:** http://localhost:3001/health
 
 ---
 
-¡Listo para comenzar! 🚀
+Ready to begin! 🚀

@@ -1,98 +1,98 @@
-# 🎨 Guía de la Interfaz de Usuario - Talavera SaaS
+# 🎨 User Interface Guide - Talavera SaaS
 
-## 🚀 Acceso a la Aplicación
+## 🚀 Application Access
 
 **URL:** http://localhost:3000
 
-## 📋 Estructura de la Interfaz
+## 📋 Interface Structure
 
-### 1. **Header (Encabezado)**
+### 1. **Header**
 - Logo: 🚀 Talavera SaaS
-- Subtítulo: Plataforma de Suscripciones Localizadas
-- Diseño: Gradiente púrpura/azul
+- Subtitle: Localized Subscriptions Platform
+- Design: Purple/Blue Gradient
 
-### 2. **Tabs (Pestañas)**
-- 🔓 **Iniciar Sesión** - Para usuarios existentes
-- 📝 **Registrarse** - Para nuevos usuarios
+### 2. **Tabs**
+- 🔓 **Sign In** - For existing users
+- 📝 **Sign Up** - For new users
 
-Puedes cambiar entre ambas pestañas haciendo clic en los botones.
+You can switch between both tabs by clicking the buttons.
 
-### 3. **Footer (Pie de Página)**
+### 3. **Footer**
 - Copyright © 2025 Talavera Solutions
 
 ---
 
-## 📝 Opción 1: Registrarse (Sign Up)
+## 📝 Option 1: Sign Up
 
-### Campos del Formulario
+### Form Fields
 
-| Campo | Descripción | Ejemplo |
+| Field | Description | Example |
 |-------|-------------|---------|
-| **Email** | Tu correo electrónico | usuario@ejemplo.com |
-| **Contraseña** | Contraseña segura | MiPassword123 |
-| **Confirmar Contraseña** | Repetir la contraseña | MiPassword123 |
-| **Idioma** | Español o English | Español |
+| **Email** | Your email address | user@example.com |
+| **Password** | Secure password | MyPassword123 |
+| **Confirm Password** | Repeat password | MyPassword123 |
+| **Language** | Spanish or English | English |
 
-### Requisitos de Contraseña ⚠️
+### Password Requirements ⚠️
 
-Tu contraseña debe cumplir:
-- ✅ **Mínimo 8 caracteres**
-- ✅ **Al menos 1 letra mayúscula** (A-Z)
-- ✅ **Al menos 1 número** (0-9)
+Your password must meet:
+- ✅ **Minimum 8 characters**
+- ✅ **At least 1 uppercase letter** (A-Z)
+- ✅ **At least 1 number** (0-9)
 
-**Ejemplos válidos:**
-- `MiPassword123`
+**Valid examples:**
+- `MyPassword123`
 - `SecurePass456`
 - `Login2025`
 
-**Ejemplos inválidos:**
-- `password123` ❌ (sin mayúscula)
-- `Password` ❌ (sin número)
-- `Pass1` ❌ (muy corto - 5 caracteres)
+**Invalid examples:**
+- `password123` ❌ (no uppercase)
+- `Password` ❌ (no number)
+- `Pass1` ❌ (too short - 5 characters)
 
-### Proceso de Registro
+### Registration Process
 
-1. Haz clic en la pestaña **📝 Registrarse**
-2. Completa todos los campos
-3. Haz clic en **✅ Crear Cuenta**
-4. Si todo es correcto:
-   - ✅ Verás un mensaje de éxito
-   - 🔑 Tu token se guardará automáticamente
-   - 📍 Serás redirigido al dashboard
+1. Click on **📝 Sign Up** tab
+2. Fill in all fields
+3. Click **✅ Create Account**
+4. If successful:
+   - ✅ You'll see a success message
+   - 🔑 Your token will be saved automatically
+   - 📍 You'll be redirected to the dashboard
 
-### Errores Comunes
+### Common Errors
 
-| Error | Solución |
+| Error | Solution |
 |-------|----------|
-| "Email inválido" | Asegúrate de escribir un email válido (ej: correo@empresa.com) |
-| "Debe contener al menos una mayúscula" | Añade una letra mayúscula (A-Z) |
-| "Debe contener al menos un número" | Añade un número (0-9) |
-| "Las contraseñas no coinciden" | Verifica que ambos campos sean iguales |
+| "Invalid email" | Make sure to enter a valid email (e.g: email@company.com) |
+| "Must contain at least one uppercase letter" | Add an uppercase letter (A-Z) |
+| "Must contain at least one number" | Add a number (0-9) |
+| "Passwords do not match" | Check that both fields are identical |
 
 ---
 
-## 🔓 Opción 2: Iniciar Sesión (Sign In)
+## 🔓 Option 2: Sign In
 
-### Campos del Formulario
+### Form Fields
 
-| Campo | Descripción | Ejemplo |
+| Field | Description | Example |
 |-------|-------------|---------|
-| **Email** | Tu correo registrado | usuario@ejemplo.com |
-| **Contraseña** | Tu contraseña | MiPassword123 |
+| **Email** | Your registered email | user@example.com |
+| **Password** | Your password | MyPassword123 |
 
-### Proceso de Inicio de Sesión
+### Sign In Process
 
-1. Haz clic en la pestaña **🔓 Iniciar Sesión** (por defecto)
-2. Ingresa tu email y contraseña
-3. Haz clic en **Iniciar Sesión**
-4. Si todo es correcto:
-   - ✅ Verás un mensaje de bienvenida
-   - 🔑 Tu token se guardará automáticamente
-   - 📍 Serás redirigido al dashboard
+1. Click on **🔓 Sign In** tab (default)
+2. Enter your email and password
+3. Click **Sign In**
+4. If successful:
+   - ✅ You'll see a welcome message
+   - 🔑 Your token will be saved automatically
+   - 📍 You'll be redirected to the dashboard
 
-### Usuario de Prueba
+### Test User
 
-Ya tienes un usuario listo:
+You already have a test user ready:
 
 ```
 Email:    demo@talavera.dev
@@ -101,40 +101,40 @@ Password: Demo12345
 
 ---
 
-## 🎨 Diseño y Experiencia
+## 🎨 Design and Experience
 
-### Colores
-- **Gradiente Principal:** Púrpura (#667eea) → Violeta (#764ba2)
-- **Acentos:** Azul cielo
-- **Errores:** Rojo (#e74c3c)
-- **Éxito:** Verde (#27ae60)
+### Colors
+- **Main Gradient:** Purple (#667eea) → Violet (#764ba2)
+- **Accents:** Sky Blue
+- **Errors:** Red (#e74c3c)
+- **Success:** Green (#27ae60)
 
-### Animaciones
-- ⬇️ **Slide Down:** Header aparece desde arriba
-- ⬆️ **Slide Up:** Contenedor aparece desde abajo
-- ➡️ **Slide In:** Errores aparecen con movimiento
-- 👁️ **Fade In:** Transiciones suaves entre formularios
+### Animations
+- ⬇️ **Slide Down:** Header appears from top
+- ⬆️ **Slide Up:** Container appears from bottom
+- ➡️ **Slide In:** Errors appear with movement
+- 👁️ **Fade In:** Smooth transitions between forms
 
-### Responsiva
-- ✅ Funciona en computadoras
-- ✅ Funciona en tablets
-- ✅ Funciona en dispositivos móviles
+### Responsive
+- ✅ Works on computers
+- ✅ Works on tablets
+- ✅ Works on mobile devices
 
 ---
 
-## 🔐 Almacenamiento de Datos
+## 🔐 Data Storage
 
 ### Local Storage
-Después de registrarte o iniciar sesión, se guardan:
+After signing up or signing in, the following are saved:
 
 ```javascript
-localStorage.getItem('authToken')    // Tu token JWT
-localStorage.getItem('userEmail')    // Tu email
+localStorage.getItem('authToken')    // Your JWT token
+localStorage.getItem('userEmail')    // Your email
 ```
 
-### Validez del Token
-- ⏰ **Duración:** 24 horas
-- 🔄 **Después de 24h:** Necesitas iniciar sesión nuevamente
+### Token Validity
+- ⏰ **Duration:** 24 hours
+- 🔄 **After 24h:** You need to sign in again
 
 ---
 

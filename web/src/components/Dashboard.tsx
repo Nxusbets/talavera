@@ -64,7 +64,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ email, onLogout }) => {
       }
     } catch (error: any) {
       console.error('Error loading data:', error);
-      setMessage({ type: 'error', text: 'Error al cargar datos' });
+      setMessage({ type: 'error', text: 'Error loading data' });
     } finally {
       setLoading(false);
     }
@@ -72,7 +72,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ email, onLogout }) => {
 
   const handleCreateProject = async () => {
     if (!newProjectName.trim()) {
-      setMessage({ type: 'error', text: 'Ingresa un nombre para el proyecto' });
+      setMessage({ type: 'error', text: 'Please enter a project name' });
       return;
     }
 
@@ -82,7 +82,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ email, onLogout }) => {
         `${API_URL}/api/projects`,
         {
           name: newProjectName,
-          description: `Proyecto: ${newProjectName}`
+          description: `Project: ${newProjectName}`
         },
         { headers }
       );
@@ -90,10 +90,10 @@ export const Dashboard: React.FC<DashboardProps> = ({ email, onLogout }) => {
       setProjects([...projects, response.data.data]);
       setNewProjectName('');
       setShowCreateForm(false);
-      setMessage({ type: 'success', text: '✅ Proyecto creado exitosamente' });
+      setMessage({ type: 'success', text: '✅ Project created successfully' });
       setTimeout(() => setMessage(null), 2000);
     } catch (error: any) {
-      const errorMsg = error.response?.data?.error?.message || 'Error al crear proyecto';
+      const errorMsg = error.response?.data?.error?.message || 'Error creating project';
       setMessage({ type: 'error', text: `❌ ${errorMsg}` });
     }
   };
@@ -102,7 +102,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ email, onLogout }) => {
     try {
       const headers = { Authorization: `Bearer ${token}` };
       
-      // Primero obtenemos los planes (sin headers de autenticación, es público)
+      // Get plans (no auth headers needed, it's public)
       const plansRes = await axios.get(`${API_URL}/api/plans`);
       console.log('Plans response:', plansRes.data.data);
       
@@ -110,11 +110,11 @@ export const Dashboard: React.FC<DashboardProps> = ({ email, onLogout }) => {
       console.log('Pro plan found:', proPlan);
 
       if (!proPlan) {
-        setMessage({ type: 'error', text: '❌ Plan Pro no encontrado' });
+        setMessage({ type: 'error', text: '❌ Pro plan not found' });
         return;
       }
 
-      // Crear suscripción
+      // Create subscription
       const response = await axios.post(
         `${API_URL}/api/subscriptions/create`,
         {
@@ -125,14 +125,14 @@ export const Dashboard: React.FC<DashboardProps> = ({ email, onLogout }) => {
 
       console.log('Subscription response:', response.data.data);
       
-      // Recargar datos completos para obtener el plan asociado
+      // Reload data to get updated plan info
       await loadData();
       
-      setMessage({ type: 'success', text: '✅ Actualizado a Plan Pro exitosamente' });
+      setMessage({ type: 'success', text: '✅ Successfully upgraded to Pro Plan' });
       setTimeout(() => setMessage(null), 2000);
     } catch (error: any) {
       console.error('Error upgrading to Pro:', error);
-      const errorMsg = error.response?.data?.error?.message || 'Error al actualizar plan';
+      const errorMsg = error.response?.data?.error?.message || 'Error upgrading plan';
       setMessage({ type: 'error', text: `❌ ${errorMsg}` });
     }
   };
@@ -146,9 +146,12 @@ export const Dashboard: React.FC<DashboardProps> = ({ email, onLogout }) => {
 
   const getPlanName = () => {
     if (subscription?.plan?.name_es) {
+      // Map Spanish names to English
+      if (subscription.plan.name_es === 'Gratis') return 'Free';
+      if (subscription.plan.name_es === 'Profesional') return 'Professional';
       return subscription.plan.name_es;
     }
-    return 'Gratuito';
+    return 'Free';
   };
 
   if (loading) {
@@ -157,14 +160,14 @@ export const Dashboard: React.FC<DashboardProps> = ({ email, onLogout }) => {
         <div className="dashboard-header">
           <div className="dashboard-info">
             <h2>📊 Dashboard</h2>
-            <p className="user-email">Usuario: {email}</p>
+            <p className="user-email">User: {email}</p>
           </div>
           <button className="logout-button" onClick={onLogout}>
-            🚪 Cerrar Sesión
+            🚪 Sign Out
           </button>
         </div>
         <div className="dashboard-content" style={{ textAlign: 'center', padding: '40px' }}>
-          <p>Cargando datos...</p>
+          <p>Loading data...</p>
         </div>
       </div>
     );
@@ -175,10 +178,10 @@ export const Dashboard: React.FC<DashboardProps> = ({ email, onLogout }) => {
       <div className="dashboard-header">
         <div className="dashboard-info">
           <h2>📊 Dashboard</h2>
-          <p className="user-email">Usuario: {email}</p>
+          <p className="user-email">User: {email}</p>
         </div>
         <button className="logout-button" onClick={onLogout}>
-          🚪 Cerrar Sesión
+          🚪 Sign Out
         </button>
       </div>
 
@@ -190,22 +193,22 @@ export const Dashboard: React.FC<DashboardProps> = ({ email, onLogout }) => {
 
       <div className="dashboard-content">
         <section className="dashboard-section">
-          <h3>📁 Mis Proyectos ({projects.length})</h3>
+          <h3>📁 My Projects ({projects.length})</h3>
           {projects.length === 0 ? (
             <div className="empty-state">
-              <p>No tienes proyectos aún.</p>
+              <p>You don't have any projects yet.</p>
               {!showCreateForm ? (
                 <button 
                   className="create-project-button"
                   onClick={() => setShowCreateForm(true)}
                 >
-                  ➕ Crear Proyecto
+                  ➕ Create Project
                 </button>
               ) : (
                 <div className="project-form">
                   <input
                     type="text"
-                    placeholder="Nombre del proyecto"
+                    placeholder="Project name"
                     value={newProjectName}
                     onChange={(e) => setNewProjectName(e.target.value)}
                     className="project-input"
@@ -215,7 +218,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ email, onLogout }) => {
                       className="create-project-button"
                       onClick={handleCreateProject}
                     >
-                      Crear
+                      Create
                     </button>
                     <button 
                       className="cancel-button"
@@ -224,7 +227,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ email, onLogout }) => {
                         setNewProjectName('');
                       }}
                     >
-                      Cancelar
+                      Cancel
                     </button>
                   </div>
                 </div>
@@ -246,13 +249,13 @@ export const Dashboard: React.FC<DashboardProps> = ({ email, onLogout }) => {
                   onClick={() => setShowCreateForm(true)}
                   style={{ marginTop: '20px' }}
                 >
-                  ➕ Crear Proyecto
+                  ➕ Create Project
                 </button>
               ) : (
                 <div className="project-form" style={{ marginTop: '20px' }}>
                   <input
                     type="text"
-                    placeholder="Nombre del proyecto"
+                    placeholder="Project name"
                     value={newProjectName}
                     onChange={(e) => setNewProjectName(e.target.value)}
                     className="project-input"
@@ -262,7 +265,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ email, onLogout }) => {
                       className="create-project-button"
                       onClick={handleCreateProject}
                     >
-                      Crear
+                      Create
                     </button>
                     <button 
                       className="cancel-button"
@@ -271,7 +274,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ email, onLogout }) => {
                         setNewProjectName('');
                       }}
                     >
-                      Cancelar
+                      Cancel
                     </button>
                   </div>
                 </div>
@@ -281,20 +284,20 @@ export const Dashboard: React.FC<DashboardProps> = ({ email, onLogout }) => {
         </section>
 
         <section className="dashboard-section">
-          <h3>💳 Mi Suscripción</h3>
+          <h3>💳 My Subscription</h3>
           <div className="subscription-info">
             <p>Plan: <strong>{getPlanName()}</strong></p>
-            <p>Proyectos disponibles: <strong>{getCurrentQuota()}</strong></p>
-            {getPlanName() === 'Gratuito' && (
+            <p>Available Projects: <strong>{getCurrentQuota()}</strong></p>
+            {getPlanName() === 'Free' && (
               <button 
                 className="upgrade-button"
                 onClick={handleUpgradeToPro}
               >
-                ⬆️ Actualizar a Pro
+                ⬆️ Upgrade to Pro
               </button>
             )}
-            {getPlanName() === 'Pro' && (
-              <p style={{ color: '#27ae60', fontWeight: 'bold' }}>✅ Ya tienes Plan Pro</p>
+            {getPlanName() === 'Professional' && (
+              <p style={{ color: '#27ae60', fontWeight: 'bold' }}>✅ You already have Pro Plan</p>
             )}
           </div>
         </section>

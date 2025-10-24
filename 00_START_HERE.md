@@ -1,26 +1,26 @@
 ╔═══════════════════════════════════════════════════════════════════════════╗
 ║                                                                           ║
-║           🎉 TALAVERA SAAS - TIER 0 SCAFFOLDING COMPLETADO 🎉            ║
+║         🎉 TALAVERA SAAS - TIER 0 SCAFFOLDING COMPLETE 🎉               ║
 ║                                                                           ║
-║                    Prototipo Full-Stack: 8 Horas                         ║
-║                  BDD/TDD + TypeScript + Docker + PostgreSQL              ║
+║                  Full-Stack Prototype: 8 Hours                           ║
+║             BDD/TDD + TypeScript + Docker + PostgreSQL                   ║
 ║                                                                           ║
 ╚═══════════════════════════════════════════════════════════════════════════╝
 
-📦 ARCHIVOS GENERADOS - RESUMEN COMPLETO
+📦 GENERATED FILES - COMPLETE SUMMARY
 ═══════════════════════════════════════════════════════════════════════════
 
-ESTRUCTURA DE CARPETAS
+FOLDER STRUCTURE
 ─────────────────────────────────────────────────────────────────────────
 
 talavera/
 ├── api/                           Backend (Express + TypeScript)
 │   ├── src/
-│   │   ├── __tests__/             Tests con Vitest
+│   │   ├── __tests__/             Tests with Vitest
 │   │   │   └── health.test.ts     ✅ PASSING
 │   │   ├── index.ts               Express entry point
 │   │   └── db.ts                  Knex configuration
-│   ├── migrations/                Knex migrations (5 archivos)
+│   ├── migrations/                Knex migrations (5 files)
 │   │   ├── 001_create_users_table.ts
 │   │   ├── 002_create_projects_table.ts
 │   │   ├── 003_create_plans_table.ts
@@ -65,7 +65,7 @@ talavera/
 ├── package.json                   Root monorepo config
 ├── .gitignore                     Git ignore rules
 │
-└── DOCUMENTATION (13 archivos)
+└── DOCUMENTATION (13 files)
     ├── README.md                  Quick start & overview
     ├── TIER0_SETUP.md             Tier 0 checklist
     ├── TIER1_GUIDE.md             Auth + Projects guide (7,000+ words)

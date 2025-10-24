@@ -14,7 +14,7 @@ const App: React.FC = () => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [userEmail, setUserEmail] = useState<string>('');
 
-  // Verificar si el usuario está autenticado al cargar la página
+  // Check if user is authenticated on page load
   useEffect(() => {
     const token = localStorage.getItem('authToken');
     const email = localStorage.getItem('userEmail');
@@ -31,12 +31,12 @@ const App: React.FC = () => {
       localStorage.setItem('authToken', token);
       localStorage.setItem('userEmail', email);
       setUserEmail(email);
-      setMessage({ type: 'success', text: `¡Bienvenido ${email}!` });
+      setMessage({ type: 'success', text: `Welcome back ${email}!` });
       setTimeout(() => {
         setIsAuthenticated(true);
       }, 1500);
     } catch (error: any) {
-      const errorMsg = error.response?.data?.error?.message || 'Error al iniciar sesión';
+      const errorMsg = error.response?.data?.error?.message || 'Sign in error';
       setMessage({ type: 'error', text: errorMsg });
     }
   };
@@ -48,12 +48,12 @@ const App: React.FC = () => {
       localStorage.setItem('authToken', token);
       localStorage.setItem('userEmail', email);
       setUserEmail(email);
-      setMessage({ type: 'success', text: `¡Cuenta creada exitosamente! Bienvenido ${email}` });
+      setMessage({ type: 'success', text: `Account created successfully! Welcome ${email}` });
       setTimeout(() => {
         setIsAuthenticated(true);
       }, 1500);
     } catch (error: any) {
-      const errorMsg = error.response?.data?.error?.message || 'Error al registrarse';
+      const errorMsg = error.response?.data?.error?.message || 'Sign up error';
       setMessage({ type: 'error', text: errorMsg });
     }
   };
@@ -63,7 +63,7 @@ const App: React.FC = () => {
     localStorage.removeItem('userEmail');
     setIsAuthenticated(false);
     setUserEmail('');
-    setMessage({ type: 'success', text: '¡Sesión cerrada correctamente!' });
+    setMessage({ type: 'success', text: 'Session closed successfully!' });
     setTimeout(() => {
       setMessage(null);
     }, 2000);
@@ -75,7 +75,7 @@ const App: React.FC = () => {
         <header className="app-header">
           <div className="header-content">
             <h1>🚀 Talavera SaaS</h1>
-            <p>Plataforma de Suscripciones Localizadas</p>
+            <p>Localized Subscriptions Platform</p>
           </div>
         </header>
 
@@ -90,13 +90,13 @@ const App: React.FC = () => {
                   className={`tab ${activeTab === 'signin' ? 'active' : ''}`}
                   onClick={() => setActiveTab('signin')}
                 >
-                  🔓 Iniciar Sesión
+                  🔓 Sign In
                 </button>
                 <button
                   className={`tab ${activeTab === 'signup' ? 'active' : ''}`}
                   onClick={() => setActiveTab('signup')}
                 >
-                  📝 Registrarse
+                  📝 Sign Up
                 </button>
               </div>
 
@@ -121,7 +121,7 @@ const App: React.FC = () => {
         </main>
 
         <footer className="app-footer">
-          <p>© 2025 Talavera Solutions. Todos los derechos reservados.</p>
+          <p>© 2025 Talavera Solutions. All rights reserved.</p>
         </footer>
       </div>
     </I18nextProvider>
