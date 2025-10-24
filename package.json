@@ -1,0 +1,21 @@
+{
+  "name": "talavera-saas",
+  "version": "0.1.0",
+  "description": "Localized Subscriptions SaaS Prototype",
+  "private": true,
+  "workspaces": [
+    "api",
+    "web"
+  ],
+  "scripts": {
+    "dev:api": "npm run dev -w api",
+    "dev:web": "npm run dev -w web",
+    "build:api": "npm run build -w api",
+    "build:web": "npm run build -w web",
+    "test": "npm run test -w api",
+    "test:coverage": "npm run test:coverage -w api",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "docker:logs": "docker-compose logs -f"
+  }
+}

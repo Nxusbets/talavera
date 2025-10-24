@@ -1,0 +1,26 @@
+{
+  "auth": {
+    "sign_in": "Iniciar Sesión",
+    "sign_up": "Registrarse",
+    "email": "Correo Electrónico",
+    "password": "Contraseña",
+    "confirm_password": "Confirmar Contraseña",
+    "submit": "Enviar",
+    "sign_in_success": "¡Sesión iniciada exitosamente!",
+    "sign_up_success": "¡Cuenta creada exitosamente!"
+  },
+  "errors": {
+    "invalid_email": "Formato de correo inválido",
+    "invalid_credentials": "Correo o contraseña inválidos",
+    "password_mismatch": "Las contraseñas no coinciden",
+    "quota_exceeded": "Ha excedido su cuota de proyectos",
+    "required_field": "Este campo es obligatorio",
+    "network_error": "Error de red. Por favor, inténtelo de nuevo."
+  },
+  "projects": {
+    "create": "Crear Proyecto",
+    "my_projects": "Mis Proyectos",
+    "project_name": "Nombre del Proyecto",
+    "no_projects": "Sin proyectos todavía"
+  }
+}

@@ -1,0 +1,61 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: talavera-postgres
+    environment:
+      POSTGRES_DB: talavera_saas
+      POSTGRES_USER: talavera_user
+      POSTGRES_PASSWORD: talavera_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U talavera_user" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    container_name: talavera-api
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      NODE_ENV: development
+      DATABASE_URL: postgresql://talavera_user:talavera_password@db:5432/talavera_saas
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: talavera_user
+      DB_PASSWORD: talavera_password
+      DB_NAME: talavera_saas
+      JWT_SECRET: dev-secret-key-change-in-production
+      PORT: 3001
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./api/src:/app/src
+    command: sh -c "./entrypoint.sh"
+
+  web:
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    container_name: talavera-web
+    environment:
+      REACT_APP_API_URL: http://localhost:3001
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./web/src:/app/src
+    command: npm start
+    depends_on:
+      - api
+
+volumes:
+  postgres_data:

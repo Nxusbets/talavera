@@ -1,0 +1,26 @@
+{
+  "auth": {
+    "sign_in": "Sign In",
+    "sign_up": "Sign Up",
+    "email": "Email",
+    "password": "Password",
+    "confirm_password": "Confirm Password",
+    "submit": "Submit",
+    "sign_in_success": "Successfully signed in!",
+    "sign_up_success": "Account created successfully!"
+  },
+  "errors": {
+    "invalid_email": "Invalid email format",
+    "invalid_credentials": "Invalid email or password",
+    "password_mismatch": "Passwords do not match",
+    "quota_exceeded": "You have exceeded your project quota",
+    "required_field": "This field is required",
+    "network_error": "Network error. Please try again."
+  },
+  "projects": {
+    "create": "Create Project",
+    "my_projects": "My Projects",
+    "project_name": "Project Name",
+    "no_projects": "No projects yet"
+  }
+}
